@@ -25,6 +25,7 @@
         <java.version>11</java.version>
         <lombok.version>1.18.18</lombok.version>
         <commons.validator.version>1.7</commons.validator.version>
+        <springdoc.version>1.5.2</springdoc.version>
     </properties>
 
     <dependencyManagement>
@@ -50,6 +51,11 @@
                 <groupId>commons-validator</groupId>
                 <artifactId>commons-validator</artifactId>
                 <version>${commons.validator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>1.5.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
