@@ -1,6 +1,10 @@
 # credorax-payment-gateway
 Credorax Test Task
 
+To test:
+- `mvn spring-boot:run` inside the checked out folder
+- `mvn clean package` and `java -jar target/payment-gateway-service-0.0.1-SNAPSHOT.jar`
+- Swagger UI can be found and tested on `http://localhost:8080/swagger-ui.html`
 
 Ideas for future improvements:
 - Complete writing audit message via messaging to a message broker topic
