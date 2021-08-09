@@ -1,5 +1,6 @@
 package com.credorax.paymentgateway.controller.dto;
 
+import lombok.Builder;
 import lombok.Value;
 
 /**
@@ -10,6 +11,7 @@ import lombok.Value;
  * @since 09.08.2021
  */
 @Value
+@Builder(toBuilder = true)
 public class CardholderDetailsDto {
     private String name;
     private String email;

@@ -1,5 +1,8 @@
 package com.credorax.paymentgateway.entity;
 
+import lombok.Builder;
+import lombok.Data;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +19,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "user_transactions")
+@Data
+@Builder(toBuilder = true)
 public class UserTransactionPersistenceModel {
 
     @Id

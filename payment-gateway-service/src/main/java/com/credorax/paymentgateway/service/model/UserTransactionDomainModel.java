@@ -1,5 +1,6 @@
 package com.credorax.paymentgateway.service.model;
 
+import lombok.Builder;
 import lombok.Value;
 
 /**
@@ -10,6 +11,7 @@ import lombok.Value;
  * @since 09.08.2021
  */
 @Value
+@Builder(toBuilder = true)
 public class UserTransactionDomainModel {
     private Long invoice;
     private Long amount;
@@ -18,12 +20,14 @@ public class UserTransactionDomainModel {
     private UserCardDomainInfo userCardInfo;
 
     @Value
+    @Builder(toBuilder = true)
     public static class CardholderDomainInfo {
         private String name;
         private String email;
     }
 
     @Value
+    @Builder(toBuilder = true)
     public static class UserCardDomainInfo {
         private String pan;
         private String expiry;

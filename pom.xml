@@ -30,6 +30,17 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>com.credorax</groupId>
+                <artifactId>payment-gateway-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.credorax</groupId>
+                <artifactId>payment-gateway-persistence</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <scope>provided</scope>

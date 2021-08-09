@@ -12,5 +12,5 @@ import com.credorax.paymentgateway.service.model.UserTransactionDomainModel;
  */
 public interface PaymentTransactionService {
     void acceptTransaction(UserTransactionDomainModel transaction);
-    UserTransactionDomainModel getTransaction(String invoice);
+    UserTransactionDomainModel getTransaction(Long invoice);
 }

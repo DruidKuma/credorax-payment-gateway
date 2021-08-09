@@ -1,4 +1,4 @@
-package com.credorax.paymentgateway;
+package com.credorax.paymentgateway.dao;
 
 import com.credorax.paymentgateway.entity.UserTransactionPersistenceModel;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,5 +13,5 @@ import java.util.Optional;
  * @since 09.08.2021
  */
 public interface PaymentTransactionRepository extends JpaRepository<UserTransactionPersistenceModel, Long> {
-    Optional<UserTransactionPersistenceModel> findByInvoice(String invoice);
+    Optional<UserTransactionPersistenceModel> findByInvoice(Long invoice);
 }

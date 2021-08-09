@@ -38,7 +38,7 @@ public class PaymentController {
     }
 
     @GetMapping("/{invoice}")
-    public PaymentRequestDto getPayment(@PathVariable String invoice) {
+    public PaymentRequestDto getPayment(@PathVariable Long invoice) {
         return PaymentRequestDomainConverter.toRequestDto(paymentTransactionService.getTransaction(invoice));
     }
 }
