@@ -15,7 +15,7 @@ import java.util.Collections;
 public class DataMaskingUtils {
 
     public static String maskAll(String input) {
-        return String.join(input, Collections.nCopies(input.length(), "*"));
+        return String.join("", Collections.nCopies(input.length(), "*"));
     }
 
     public static String maskAllButLastFour(String input) {

@@ -23,24 +23,32 @@ import java.util.Objects;
  */
 public class PaymentRequestValidator {
 
-    private static final String INVOICE_EMPTY_MESSAGE = "Invoice number must be present";
-    private static final String AMOUNT_EMPTY_MESSAGE = "Amount must be present";
-    private static final String CURRENCY_EMPTY_MESSAGE = "Currency must be present";
-    private static final String CARDHOLDER_EMPTY_MESSAGE = "Cardholder information must be present";
-    private static final String CARDHOLDER_NAME_EMPTY_MESSAGE = "Cardholder name must be present";
-    private static final String CARDHOLDER_EMAIL_EMPTY_MESSAGE = "Cardholder email must be present";
-    private static final String CARD_EMPTY_MESSAGE = "Card information must be present";
-    private static final String CARD_PAN_EMPTY_MESSAGE = "Card PAN must be present";
-    private static final String CARD_EXPIRY_EMPTY_MESSAGE = "Card expiry date must be present";
-    private static final String CARD_CVV_EMPTY_MESSAGE = "Card CVV number must be present";
-    private static final String CARDHOLDER_EMAIL_INCORRECT_MESSAGE = "Cardholder email must be in a correct format";
-    private static final String AMOUNT_NON_POSITIVE_MESSAGE = "Amount must be a positive number";
-    private static final String PAN_INCORRECT_MESSAGE = "Card number is incorrect";
-    private static final String PAN_INCORRECT_LENGTH_MESSAGE = "Card number length is incorrect";
-    private static final String EXPIRY_DATE_INCORRECT_MESSAGE = "Card expiry date is incorrect";
-    private static final String EXPIRY_DATE_OLD_MESSAGE = "Card expiry date must be after current day";
+    public static final String INVOICE_EMPTY_MESSAGE = "Invoice number must be present";
+    public static final String AMOUNT_EMPTY_MESSAGE = "Amount must be present";
+    public static final String CURRENCY_EMPTY_MESSAGE = "Currency must be present";
+    public static final String CARDHOLDER_EMPTY_MESSAGE = "Cardholder information must be present";
+    public static final String CARDHOLDER_NAME_EMPTY_MESSAGE = "Cardholder name must be present";
+    public static final String CARDHOLDER_EMAIL_EMPTY_MESSAGE = "Cardholder email must be present";
+    public static final String CARD_EMPTY_MESSAGE = "Card information must be present";
+    public static final String CARD_PAN_EMPTY_MESSAGE = "Card PAN must be present";
+    public static final String CARD_EXPIRY_EMPTY_MESSAGE = "Card expiry date must be present";
+    public static final String CARD_CVV_EMPTY_MESSAGE = "Card CVV number must be present";
+    public static final String CARDHOLDER_EMAIL_INCORRECT_MESSAGE = "Cardholder email must be in a correct format";
+    public static final String AMOUNT_NON_POSITIVE_MESSAGE = "Amount must be a positive number";
+    public static final String PAN_INCORRECT_MESSAGE = "Card number is incorrect";
+    public static final String PAN_INCORRECT_LENGTH_MESSAGE = "Card number length is incorrect";
+    public static final String EXPIRY_DATE_INCORRECT_MESSAGE = "Card expiry date is incorrect";
+    public static final String EXPIRY_DATE_OLD_MESSAGE = "Card expiry date must be after current day";
 
     public void validate(PaymentRequestDto paymentRequest) {
+        Map<String, String> errors = validateRequestFields(paymentRequest);
+
+        if (!errors.isEmpty()) {
+            throw new PaymentValidationException(errors);
+        }
+    }
+
+    public Map<String, String> validateRequestFields(PaymentRequestDto paymentRequest) {
         Map<String, String> errors = new HashMap<>();
 
         if (Objects.isNull(paymentRequest.getAmount())) errors.put("invoice", INVOICE_EMPTY_MESSAGE);
@@ -72,14 +80,12 @@ public class PaymentRequestValidator {
             if (Objects.isNull(card.getCvv())) errors.put("cvv", CARD_CVV_EMPTY_MESSAGE);
         }
 
-        if (!errors.isEmpty()) {
-            throw new PaymentValidationException(errors);
-        }
+        return errors;
     }
 
     private void validateCardExpiryDate(String expiryDate, Map<String, String> errors) {
         try {
-            if (!new SimpleDateFormat("MM/yy").parse(expiryDate).before(new Date()))
+            if (new SimpleDateFormat("MM/yy").parse(expiryDate).before(new Date()))
                 errors.put("expiry", EXPIRY_DATE_OLD_MESSAGE);
         } catch (ParseException e) {
             errors.put("expiry", EXPIRY_DATE_INCORRECT_MESSAGE);
